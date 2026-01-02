@@ -45,7 +45,7 @@ class ProvisionPostgresInstance implements ShouldQueue
 
         $instanceSlug = Str::slug($this->project_data->name) . '-' . Str::random(6); // Crée une instance PostgreSQL avec Helm sur Kubernetes
         $process = Process::fromShellCommandline(sprintf(
-            'helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
+            'KUBECONFIG=/etc/kubernetes/k3s.yaml helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
                 '--set auth.username=%2$s --set auth.password=%3$s --set auth.database=%4$s ' .
                 '--set primary.persistence.size=%5$s ' .
                 '--set resources.requests.memory=%6$s ' .
