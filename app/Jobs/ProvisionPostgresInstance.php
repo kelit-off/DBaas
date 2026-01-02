@@ -64,7 +64,10 @@ class ProvisionPostgresInstance implements ShouldQueue
         $process->run();
 
         if (!$process->isSuccessful()) {
-            throw new RuntimeException(sprintf('', $process->getErrorOutput()));
+            throw new RuntimeException(message: "Helm command failed:\n" .
+                "Output:\n" . $process->getOutput() . "\n" .
+                "Error Output:\n" . $process->getErrorOutput()
+            );
         }
 
         $compute_instance = ComputeInstance::create([
