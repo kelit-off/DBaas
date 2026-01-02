@@ -135,7 +135,7 @@ export default function Login({
                     variant="outline"
                     onClick={() =>
                     (window.location.href =
-                        'http://localhost:8000/auth/redirect/google')
+                        '/auth/redirect/google')
                     }
                 >
                     Continue with Google
@@ -146,7 +146,7 @@ export default function Login({
                     variant="outline"
                     onClick={() =>
                     (window.location.href =
-                        'http://localhost:8000/auth/redirect/github')
+                        '/auth/redirect/github')
                     }
                 >
                     Continue with GitHub
