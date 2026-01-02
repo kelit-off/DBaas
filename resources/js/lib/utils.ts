@@ -16,3 +16,14 @@ export function isSameUrl(
 export function resolveUrl(url: NonNullable<InertiaLinkProps['href']>): string {
     return typeof url === 'string' ? url : url.url;
 }
+
+export function updateFormData(e: React.ChangeEvent<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+>) {
+    const { name, value, type, checked } = e.target;
+
+    return {
+        name,
+        value: type === 'checkbox' ? checked : value,
+    };
+}

@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('teams', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string("type");
+            $table->foreignId('owner_id')->constrained('users');
+            $table->string('slug')->unique();
+            $table->foreignId('pricing_plan_id')->constrained()->after('slug');
             $table->timestamps();
         });
     }

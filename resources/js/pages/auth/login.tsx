@@ -115,6 +115,54 @@ export default function Login({
                     {status}
                 </div>
             )}
+
+            {/* Séparateur */}
+            <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                    <span className="w-full border-t" />
+                </div>
+                <div className="relative flex justify-center text-xs uppercase">
+                    <span className="bg-background px-2 text-muted-foreground">
+                        Or continue with
+                    </span>
+                </div>
+            </div>
+
+            {/* Boutons Social Login */}
+            <div className="grid gap-2">
+                <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                    (window.location.href =
+                        'http://localhost:8000/auth/redirect/google')
+                    }
+                >
+                    Continue with Google
+                </Button>
+
+                <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                    (window.location.href =
+                        'http://localhost:8000/auth/redirect/github')
+                    }
+                >
+                    Continue with GitHub
+                </Button>
+
+                {/* <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() =>
+                    (window.location.href =
+                        'http://localhost:8000/auth/redirect/discord')
+                    }
+                >
+                    Continue with Discord
+                </Button> */}
+            </div>
         </AuthLayout>
     );
 }

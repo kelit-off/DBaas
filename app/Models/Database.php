@@ -6,5 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 
 class Database extends Model
 {
-    //
+    protected $fillable = [
+        'compute_instance_id',
+        'project_id',
+        'name',
+        'username',
+        'password', // chiffré si nécessaire
+        'role',     // main, branch, analytics...
+        'host',     // host de connexion
+        'port',
+    ];
+
+    protected $casts = [
+        'port' => 'integer',
+    ];
+
+    /**
+     * Une base appartient à un projet
+     */
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    /**
+     * Une base appartient à une instance
+     */
+    public function computeInstance()
+    {
+        return $this->belongsTo(ComputeInstance::class);
+    }
 }
