@@ -16,7 +16,7 @@ return new class extends Migration
 
             // Liens
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('compute_plan_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('computer_plan_id')->constrained()->cascadeOnDelete();
 
             // Ressources
             $table->unsignedTinyInteger('cpu')->nullable();

@@ -8,7 +8,7 @@ class ComputeInstance extends Model
 {
     protected $fillable = [
         'project_id',
-        'compute_plan_id',
+        'computer_plan_id',
         'cpu',
         'memory_mb',
         'storage_mb',
