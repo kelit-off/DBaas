@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ComputeInstance extends Model
+class ComputerInstance extends Model
 {
     protected $fillable = [
         'project_id',
@@ -34,7 +34,7 @@ class ComputeInstance extends Model
      */
     public function computePlan()
     {
-        return $this->belongsTo(ComputePlan::class);
+        return $this->belongsTo(ComputerPlan::class);
     }
 
     /**

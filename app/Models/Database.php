@@ -34,6 +34,6 @@ class Database extends Model
      */
     public function computeInstance()
     {
-        return $this->belongsTo(ComputeInstance::class);
+        return $this->belongsTo(ComputerInstance::class);
     }
 }

@@ -23,7 +23,7 @@ class Project extends Model
 
     public function computeInstances()
     {
-        return $this->hasMany(ComputeInstance::class);
+        return $this->hasMany(ComputerInstance::class);
     }
 
     public function databases()
