@@ -3,6 +3,20 @@ import { Head, usePage } from "@inertiajs/react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import MetricCard from "@/components/MetricCard";
+import { NavItem } from "@/types";
+
+function Nav(slug: string): NavItem[] {
+  return [
+    {
+      title: "Project Overview",
+      href: "/dashboard/projects/" + slug,
+    },
+    {
+        title: "Table Editor",
+        href: "/dashboard/projects/" + slug + "/tables", // Par contre cela redirige vers une page mais cette page le redirigera vers "/dashboard/projects/" + slug + "/tables/{id_table}"
+    }
+  ];
+}
 
 export default function ProjectDashboard() {
     const { project } = usePage().props as any;

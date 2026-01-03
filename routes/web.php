@@ -13,6 +13,10 @@ Route::get('/', function () {
     ]);
 })->name('home');
 
+Route::get('/database', function() {
+    return Inertia::render('database');
+});
+
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard', [

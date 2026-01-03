@@ -12,7 +12,7 @@ class TeamService
         return Team::with([
             'PricingPlan:id,code,name',
             'projects:id,team_id,name', // sélectionne seulement les colonnes nécessaires
-            'projects.computeInstances:id,project_id,name,computer_plan_id',
+            'projects.computeInstances:id,project_id,computer_plan_id',
             'projects.computeInstances.computerPlan:id,code,name',
         ])
             ->withCount('projects')
