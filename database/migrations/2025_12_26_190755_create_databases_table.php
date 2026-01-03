@@ -20,7 +20,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             // Instance liée
-            $table->foreignId('compute_instance_id')
+            $table->foreignId('computer_instance_id')
                 ->nullable()
                 ->constrained()
                 ->nullOnDelete();
