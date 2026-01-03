@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Database extends Model
 {
     protected $fillable = [
-        'compute_instance_id',
+        'computer_instance_id',
         'project_id',
         'name',
         'username',

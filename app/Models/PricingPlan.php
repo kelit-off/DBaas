@@ -13,7 +13,7 @@ class PricingPlan extends Model
 
     public function computePlans()
     {
-        return $this->belongsToMany(ComputePlan::class, 'pricing_compute_plan');
+        return $this->belongsToMany(ComputePlan::class, 'pricing_computer_plan');
     }
 
     public function projects()
