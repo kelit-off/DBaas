@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pricing_compute_plan', function (Blueprint $table) {
+        Schema::create('pricing_computer_plan', function (Blueprint $table) {
             $table->id();
             $table->foreignId('pricing_plan_id')->constrained();
-            $table->foreignId('compute_plan_id')->constrained();
+            $table->foreignId('computer_plan_id')->constrained();
         });
     }
 
