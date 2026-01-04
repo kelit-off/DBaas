@@ -16,6 +16,7 @@
         "k8s/ws-ratchet": "^1.1",
         "laravel/fortify": "^1.30",
         "laravel/framework": "^12.0",
+        "laravel/nightwatch": "*",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1",
