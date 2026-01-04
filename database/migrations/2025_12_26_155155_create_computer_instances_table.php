@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('compute_instances', function (Blueprint $table) {
+        Schema::create('computer_instances', function (Blueprint $table) {
             $table->id();
 
             // Liens
@@ -43,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('compute_instances');
+        Schema::dropIfExists('computer_instances');
     }
 };

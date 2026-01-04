@@ -4,25 +4,26 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import MetricCard from "@/components/MetricCard";
 import { NavItem } from "@/types";
+import { AppSidebar } from "@/components/app-sidebar";
 
 function Nav(slug: string): NavItem[] {
-  return [
-    {
-      title: "Project Overview",
-      href: "/dashboard/projects/" + slug,
-    },
-    {
-        title: "Table Editor",
-        href: "/dashboard/projects/" + slug + "/tables", // Par contre cela redirige vers une page mais cette page le redirigera vers "/dashboard/projects/" + slug + "/tables/{id_table}"
-    }
-  ];
+    return [
+        {
+            title: "Project Overview",
+            href: "/dashboard/project/" + slug,
+        },
+        {
+            title: "Table Editor",
+            href: "/dashboard/project/" + slug + "/tables", // Par contre cela redirige vers une page mais cette page le redirigera vers "/dashboard/projects/" + slug + "/tables/{id_table}"
+        }
+    ];
 }
 
 export default function ProjectDashboard() {
-    const { project } = usePage().props as any;
-
+    const { project, slug } = usePage().props as any;
+    console.log("Project data:", project);
     return (
-        <AppLayout>
+        <AppLayout sidebar={<AppSidebar mainNav={Nav(slug)} />}>
             <Head title={project.name} />
 
             <div className="px-8 py-6 space-y-8">
@@ -34,7 +35,7 @@ export default function ProjectDashboard() {
                             {project.name}
                         </h1>
 
-                        {project.compute_instances?.map((instance) => (
+                        {project.computer_instances?.map((instance) => (
                             <Badge key={instance.id} variant="secondary">
                                 {instance.name} · {instance.compute_plan.code.toUpperCase()}
                             </Badge>
@@ -45,14 +46,14 @@ export default function ProjectDashboard() {
                         <span>
                             Databases{" "}
                             <strong className="text-white">
-                                {project.databases.length}
+                                {project?.databases?.length ?? 0}
                             </strong>
                         </span>
 
                         <span>
                             Instances{" "}
                             <strong className="text-white">
-                                {project.compute_instances.length}
+                                {project.computer_instances.length}
                             </strong>
                         </span>
 
@@ -96,7 +97,7 @@ export default function ProjectDashboard() {
                     </CardHeader>
 
                     <CardContent className="space-y-4">
-                        {project.compute_instances.map((instance) => (
+                        {project.computer_instances.map((instance) => (
                             <div
                                 key={instance.id}
                                 className="flex items-center justify-between rounded-lg border border-neutral-800 px-4 py-3"
@@ -106,14 +107,14 @@ export default function ProjectDashboard() {
                                         {instance.name}
                                     </div>
                                     <div className="text-sm text-neutral-400">
-                                        {instance.compute_plan.cpu_cores} vCPU ·{" "}
-                                        {instance.compute_plan.ram_mb} MB RAM
+                                        {instance.computer_plan.cpu_cores} vCPU ·{" "}
+                                        {instance.computer_plan.ram_mb} MB RAM
                                     </div>
                                 </div>
 
                                 <div className="flex items-center gap-4">
                                     <Badge variant="secondary">
-                                        {instance.compute_plan.code.toUpperCase()}
+                                        {instance.computer_plan.code.toUpperCase()}
                                     </Badge>
 
                                     <Badge

@@ -8,7 +8,24 @@ export default function MetricCard({
     title: string;
     subtitle: string;
     value: number;
+    type: string;
 }) {
+
+    switch (type) {
+        case "queries":
+            value = 12400;
+            break;
+        case "connections":
+            value = 18;
+            break;
+        case "disk":
+            value = 1.2;
+            break;
+        case "cpu":
+            value = 23;
+            break;
+    }
+
     return (
         <Card>
             <CardHeader className="pb-2">

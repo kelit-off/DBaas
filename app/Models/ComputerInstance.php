@@ -32,7 +32,7 @@ class ComputerInstance extends Model
     /**
      * Relation vers le plan de compute
      */
-    public function computePlan()
+    public function computerPlan()
     {
         return $this->belongsTo(ComputerPlan::class);
     }

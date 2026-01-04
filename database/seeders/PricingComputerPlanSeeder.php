@@ -2,12 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\ComputePlan;
+use App\Models\ComputerPlan;
 use App\Models\PricingPlan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class PricingComputePlanSeeder extends Seeder
+class PricingComputerPlanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,16 +18,16 @@ class PricingComputePlanSeeder extends Seeder
 
         $allPlans = PricingPlan::where('code', '!=', 'free')->get();
 
-        $allCompute = ComputePlan::pluck('id')->toArray();
+        $allCompute = ComputerPlan::pluck('id')->toArray();
 
-        $nano = ComputePlan::where('code', 'nano')->first();
-        
+        $nano = ComputerPlan::where('code', 'nano')->first();
+
         // Free → nano only
-        $free->computePlans()->sync([$nano->id]);
+        $free->computerPlans()->sync([$nano->id]);
 
         // Tous les autres → tout
         foreach ($allPlans as $plan) {
-            $plan->computePlans()->sync($allCompute);
+            $plan->computerPlans()->sync($allCompute);
         }
     }
 }

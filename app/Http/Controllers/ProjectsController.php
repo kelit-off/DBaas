@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ProvisionPostgresInstance;
-use App\Models\ComputePlan;
 use App\Models\Database;
 use App\Models\Project;
 use App\Models\Team;
@@ -24,10 +23,10 @@ class ProjectsController extends Controller
             'region' => 'required|string'
         ]);
 
-        $team = Team::with(["pricingPlan:id,code,name", 'pricingPlan.computePlans:id,code'])->where("slug", $request->team)->first();
+        $team = Team::with(["pricingPlan:id,code,name", 'pricingPlan.computerPlans:id,code'])->where("slug", $request->team)->first();
 
         if ($team->pricingPlan->code == "free") {
-            $compute_plan_id = $team->pricingPlan->computePlans->first()->id;
+            $computer_plan_id = $team->pricingPlan->computerPlans->first()->id;
         } else {
 
         }
@@ -42,7 +41,7 @@ class ProjectsController extends Controller
 
         $project->password = $request->password;
 
-        ProvisionPostgresInstance::dispatch($team->pricingPlan->computePlans->first(), $project);
+        ProvisionPostgresInstance::dispatch($team->pricingPlan->computerPlans->first(), $project);
 
 
 

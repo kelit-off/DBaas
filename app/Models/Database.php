@@ -32,7 +32,7 @@ class Database extends Model
     /**
      * Une base appartient à une instance
      */
-    public function computeInstance()
+    public function computerInstance()
     {
         return $this->belongsTo(ComputerInstance::class);
     }

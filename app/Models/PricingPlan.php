@@ -11,7 +11,7 @@ class PricingPlan extends Model
 
     protected $fillable = ['code', 'name', 'monthly_price', 'currency'];
 
-    public function computePlans()
+    public function computerPlans()
     {
         return $this->belongsToMany(ComputerPlan::class, 'pricing_computer_plan');
     }

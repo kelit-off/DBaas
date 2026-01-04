@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Models\ComputeInstance;
-use App\Models\ComputePlan;
+use App\Models\ComputerInstance;
+use App\Models\ComputerPlan;
 use App\Models\Database;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
@@ -17,17 +17,17 @@ class ProvisionPostgresInstance implements ShouldQueue
 {
     use Queueable;
 
-    private $computePlan;
+    private $computerPlan;
     private $project_data;
     private $bd_data;
 
     /**
      * Create a new job instance.
-     * @param ComputePlan $computePlan permet de savoir quel plan appliquer a l'instance
+     * @param ComputerPlan $computerPlan permet de savoir quel plan appliquer a l'instance
      */
-    public function __construct(ComputePlan $computePlan, $project_data)
+    public function __construct(ComputerPlan $computerPlan, $project_data)
     {
-        $this->computePlan = $computePlan;
+        $this->computerPlan = $computerPlan;
         $this->project_data = $project_data;
 
         $this->bd_data = [
@@ -56,9 +56,9 @@ class ProvisionPostgresInstance implements ShouldQueue
             $this->bd_data['username'],
             $this->bd_data['password'],
             $this->bd_data['name'],
-            $this->computePlan->storage_mb . 'Mi',
-            $this->computePlan->memory_mb . 'Mi',
-            $this->computePlan->cpu_cores
+            $this->computerPlan->storage_mb . 'Mi',
+            $this->computerPlan->memory_mb . 'Mi',
+            $this->computerPlan->cpu_cores
         ));
 
         $process->run();
@@ -70,12 +70,12 @@ class ProvisionPostgresInstance implements ShouldQueue
             );
         }
 
-        $compute_instance = ComputeInstance::create([
+        $compute_instance = ComputerInstance::create([
             "project_id" => $this->project_data->id,
-            "compute_plan_id" => $this->computePlan->id,
-            "cpu" => $this->computePlan->cpu,
-            "memory_mb" => $this->computePlan->memory_mb,
-            "storage_mb" => $this->computePlan->storage_mb,
+            "computer_plan_id" => $this->computerPlan->id,
+            "cpu" => $this->computerPlan->cpu,
+            "memory_mb" => $this->computerPlan->memory_mb,
+            "storage_mb" => $this->computerPlan->storage_mb,
             "role" => "main",
             "host" => "bd." . $this->project_data->slug . ".dbaas.com",
             'status' => 'active',

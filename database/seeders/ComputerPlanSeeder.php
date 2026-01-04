@@ -2,20 +2,20 @@
 
 namespace Database\Seeders;
 
-use App\Models\ComputePlan;
+use App\Models\ComputerPlan;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ComputePlanSeeder extends Seeder
+class ComputerPlanSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        ComputePlan::truncate();
+        ComputerPlan::truncate();
 
-        ComputePlan::insert([
+        ComputerPlan::insert([
             [
                 'code' => 'nano',
                 'name' => 'Nano',

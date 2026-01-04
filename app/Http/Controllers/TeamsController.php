@@ -44,7 +44,7 @@ class TeamsController extends Controller
 
     public function show($slug)
     {
-        $projects = Project::with(["computeInstances.computerPlan"])->whereHas('team', function ($query) use ($slug) {
+        $projects = Project::with(["computerInstances.computerPlan"])->whereHas('team', function ($query) use ($slug) {
             $query->where('slug', $slug);
         })->get();
 

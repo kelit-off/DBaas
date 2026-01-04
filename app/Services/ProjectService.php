@@ -12,7 +12,7 @@ class ProjectService
 
     public function get($slug) {
         return Project::with([
-            "computeInstances.computePlan",
+            "computerInstances.computerPlan",
             "databases",
         ])
         ->where("slug", $slug)->first();

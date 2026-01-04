@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ComputePlan extends Model
+class ComputerPlan extends Model
 {
     use HasFactory;
 
@@ -16,8 +16,8 @@ class ComputePlan extends Model
         return $this->belongsToMany(PricingPlan::class, 'pricing_computer_plan');
     }
 
-    public function computeInstances()
+    public function computerInstances()
     {
-        return $this->hasMany(ComputeInstance::class);
+        return $this->hasMany(ComputerInstance::class);
     }
 }

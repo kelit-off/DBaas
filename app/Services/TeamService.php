@@ -12,8 +12,8 @@ class TeamService
         return Team::with([
             'PricingPlan:id,code,name',
             'projects:id,team_id,name', // sélectionne seulement les colonnes nécessaires
-            'projects.computeInstances:id,project_id,computer_plan_id',
-            'projects.computeInstances.computerPlan:id,code,name',
+            'projects.computerInstances:id,project_id,computer_plan_id',
+            'projects.computerInstances.computerPlan:id,code,name',
         ])
             ->withCount('projects')
             ->whereHas('users', function ($q) {
@@ -27,8 +27,8 @@ class TeamService
         return Team::with([
             'PricingPlan:id,code,name',
             'projects:id,team_id,name', // sélectionne seulement les colonnes nécessaires
-            'projects.computeInstances:id,project_id,name,computer_plan_id',
-            'projects.computeInstances.computerPlan:id,code,name',
+            'projects.computerInstances:id,project_id,name,computer_plan_id',
+            'projects.computerInstances.computerPlan:id,code,name',
             'users'
         ])
             ->withCount('projects')

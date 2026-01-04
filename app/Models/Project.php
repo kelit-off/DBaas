@@ -21,7 +21,7 @@ class Project extends Model
         return $this->belongsTo(Team::class);
     }
 
-    public function computeInstances()
+    public function computerInstances()
     {
         return $this->hasMany(ComputerInstance::class);
     }
