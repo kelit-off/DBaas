@@ -46,16 +46,11 @@ class ProvisionPostgresInstance implements ShouldQueue
         $instanceSlug = Str::slug($this->project_data->name) . '-' . Str::random(6); // Crée une instance PostgreSQL avec Helm sur Kubernetes
         $process = Process::fromShellCommandline(sprintf(
             'KUBECONFIG=/etc/kubernetes/k3s.yaml helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
-                '--set auth.username=%2$s --set auth.password=%3$s --set auth.database=%4$s ' .
+                '--set auth.username=%2$s,auth.password=%3$s,auth.database=%4$s ' .
                 '--set primary.persistence.size=%5$s ' .
-                '--set resources.requests.memory=%6$s ' .
-                '--set resources.requests.cpu=%7$s ' .
-                '--set resources.limits.memory=%6$s ' .
-                '--set resources.limits.cpu=%7$s' .
-                '--set metrics.enabled=true ' .
-                '--set metrics.service.port=9187 ' .
-                '--set metrics.labels.dbaas-db-id=%1$s ' .
-                '--set metrics.service.type=ClusterIP',
+                '--set resources.requests.memory=%6$s,resources.requests.cpu=%7$s ' .
+                '--set resources.limits.memory=%6$s,resources.limits.cpu=%7$s ' .
+                '--set metrics.enabled=true,metrics.service.port=9187,metrics.service.type=ClusterIP',
             $instanceSlug,
             $this->bd_data['username'],
             $this->bd_data['password'],

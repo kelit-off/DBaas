@@ -35,7 +35,7 @@ class SocialAuthController extends Controller
 
                 Auth::login($user, true);
 
-                return redirect("/app");
+                return redirect("/dashboard");
             }
         } else {
             $user = User::create([
