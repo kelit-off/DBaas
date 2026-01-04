@@ -3,12 +3,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 export default function MetricCard({
     title,
     subtitle,
-    value,
+    type = null,
 }: {
     title: string;
     subtitle: string;
-    value: number;
-    type: string;
+    type: string | null;
 }) {
 
     switch (type) {
@@ -24,6 +23,8 @@ export default function MetricCard({
         case "cpu":
             value = 23;
             break;
+        default:
+            return null;
     }
 
     return (

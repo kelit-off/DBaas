@@ -51,7 +51,11 @@ class ProvisionPostgresInstance implements ShouldQueue
                 '--set resources.requests.memory=%6$s ' .
                 '--set resources.requests.cpu=%7$s ' .
                 '--set resources.limits.memory=%6$s ' .
-                '--set resources.limits.cpu=%7$s',
+                '--set resources.limits.cpu=%7$s' .
+                '--set metrics.enabled=true ' .
+                '--set metrics.service.port=9187 ' .
+                '--set metrics.labels.dbaas-db-id=%1$s ' .
+                '--set metrics.service.type=ClusterIP',
             $instanceSlug,
             $this->bd_data['username'],
             $this->bd_data['password'],
@@ -64,9 +68,10 @@ class ProvisionPostgresInstance implements ShouldQueue
         $process->run();
 
         if (!$process->isSuccessful()) {
-            throw new RuntimeException(message: "Helm command failed:\n" .
-                "Output:\n" . $process->getOutput() . "\n" .
-                "Error Output:\n" . $process->getErrorOutput()
+            throw new RuntimeException(
+                message: "Helm command failed:\n" .
+                    "Output:\n" . $process->getOutput() . "\n" .
+                    "Error Output:\n" . $process->getErrorOutput()
             );
         }
 
