@@ -47,7 +47,7 @@ class ProvisionPostgresInstance implements ShouldQueue
         $instanceSlug = Str::lower($instanceSlug);
         $instanceSlug = strtolower($instanceSlug);
         if (!preg_match('/^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/', $instanceSlug)) {
-            throw new \RuntimeException("Slug invalide pour Helm: $instanceSlug");
+            throw new RuntimeException("Slug invalide pour Helm: $instanceSlug");
         }
 
         $process = Process::fromShellCommandline(sprintf(
@@ -63,7 +63,7 @@ class ProvisionPostgresInstance implements ShouldQueue
             $this->bd_data['name'],
             $this->computerPlan->storage_mb . 'Mi',
             $this->computerPlan->memory_mb . 'Mi',
-            $this->computerPlan->cpu_cores
+            (string) $this->computerPlan->cpu_cores
         ));
 
         $process->setEnv([
