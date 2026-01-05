@@ -46,8 +46,12 @@ class ProvisionPostgresInstance implements ShouldQueue
         $instanceSlug = substr(Str::slug($this->project_data->name) . '-' . substr(str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789'), 0, 20), 0, 53);
         $instanceSlug = Str::lower($instanceSlug);
         $instanceSlug = strtolower($instanceSlug);
+        if (!preg_match('/^[a-z0-9]([-a-z0-9]*[a-z0-9])?$/', $instanceSlug)) {
+            throw new \RuntimeException("Slug invalide pour Helm: $instanceSlug");
+        }
+
         $process = Process::fromShellCommandline(sprintf(
-            'KUBECONFIG=/etc/kubernetes/k3s.yaml helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
+            'helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
                 '--set auth.username=%2$s,auth.password=%3$s,auth.database=%4$s ' .
                 '--set primary.persistence.size=%5$s ' .
                 '--set resources.requests.memory=%6$s,resources.requests.cpu=%7$s ' .
@@ -61,6 +65,10 @@ class ProvisionPostgresInstance implements ShouldQueue
             $this->computerPlan->memory_mb . 'Mi',
             $this->computerPlan->cpu_cores
         ));
+
+        $process->setEnv([
+            'KUBECONFIG' => "/etc/kubernetes/k3s.yaml"
+        ])
 
         $process->run();
 
