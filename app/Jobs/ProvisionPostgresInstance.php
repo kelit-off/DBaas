@@ -99,20 +99,20 @@ class ProvisionPostgresInstance implements ShouldQueue
             'slug' => $instanceSlug,
         ]);
 
-        $createDbCommand = sprintf(
-            'PGPASSWORD=%s psql -h %s -U %s -c "CREATE DATABASE %s;"',
-            $this->bd_data['password'],
-            'db.' . $this->project_data->slug . '.dbaas.com',
-            $this->bd_data['username'],
-            $this->bd_data['name']
-        );
+        // $createDbCommand = sprintf(
+        //     'PGPASSWORD=%s psql -h %s -U %s -c "CREATE DATABASE %s;"',
+        //     $this->bd_data['password'],
+        //     'db.' . $this->project_data->slug . '.dbaas.com',
+        //     $this->bd_data['username'],
+        //     $this->bd_data['name']
+        // );
 
-        $processDb = Process::fromShellCommandline($createDbCommand);
-        $processDb->run();
+        // $processDb = Process::fromShellCommandline($createDbCommand);
+        // $processDb->run();
 
-        if (!$processDb->isSuccessful()) {
-            throw new RuntimeException("Database creation failed: " . $processDb->getErrorOutput());
-        }
+        // if (!$processDb->isSuccessful()) {
+        //     throw new RuntimeException("Database creation failed: " . $processDb->getErrorOutput());
+        // }
 
         Database::create([
             'compute_instance_id' => $compute_instance->id,
