@@ -54,8 +54,8 @@ class ProvisionPostgresInstance implements ShouldQueue
             'helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
                 '--set auth.username=%2$s,auth.password=%3$s,auth.database=%4$s ' .
                 '--set primary.persistence.size=%5$s ' .
-                '--set resources.requests.memory=%6$s,resources.requests.cpu=%7$s ' .
-                '--set resources.limits.memory=%6$s,resources.limits.cpu=%7$s ' .
+                '--set-string resources.requests.memory=%6$s,resources.requests.cpu=%7$s ' .
+                '--set-string resources.limits.memory=%6$s,resources.limits.cpu=%7$s ' .
                 '--set metrics.enabled=true,metrics.service.port=9187,metrics.service.type=ClusterIP',
             $instanceSlug,
             $this->bd_data['username'],
