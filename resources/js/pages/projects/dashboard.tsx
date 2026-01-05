@@ -37,7 +37,7 @@ export default function ProjectDashboard() {
 
                         {project.computer_instances?.map((instance) => (
                             <Badge key={instance.id} variant="secondary">
-                                {instance.name} · {instance.compute_plan.code.toUpperCase()}
+                                {instance.name} · {instance.computer_plan.code.toUpperCase()}
                             </Badge>
                         ))}
                     </div>
@@ -114,7 +114,7 @@ export default function ProjectDashboard() {
 
                                 <div className="flex items-center gap-4">
                                     <Badge variant="secondary">
-                                        {instance.computer_plan.code.toUpperCase()}
+                                        {instance.computer_plan.name}
                                     </Badge>
 
                                     <Badge
