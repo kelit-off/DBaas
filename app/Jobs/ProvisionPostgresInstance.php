@@ -43,8 +43,9 @@ class ProvisionPostgresInstance implements ShouldQueue
     public function handle(): void
     {
 
-        $instanceSlug = substr(Str::slug($this->project_data->name) . '-' . substr(str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789'), 0, 6), 0, 53);
+        $instanceSlug = substr(Str::slug($this->project_data->name) . '-' . substr(str_shuffle('abcdefghijklmnopqrstuvwxyz0123456789'), 0, 20), 0, 53);
         $instanceSlug = Str::lower($instanceSlug);
+        $instanceSlug = strtolower($instanceSlug);
         $process = Process::fromShellCommandline(sprintf(
             'KUBECONFIG=/etc/kubernetes/k3s.yaml helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
                 '--set auth.username=%2$s,auth.password=%3$s,auth.database=%4$s ' .
