@@ -68,7 +68,7 @@ class ProvisionPostgresInstance implements ShouldQueue
 
         $process->setEnv([
             'KUBECONFIG' => "/etc/kubernetes/k3s.yaml"
-        ])
+        ]);
 
         $process->run();
 
