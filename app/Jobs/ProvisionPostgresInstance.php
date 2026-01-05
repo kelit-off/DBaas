@@ -50,6 +50,7 @@ class ProvisionPostgresInstance implements ShouldQueue
             throw new RuntimeException("Slug invalide pour Helm: $instanceSlug");
         }
 
+        $cpu = (string)$this->computerPlan->cpu_cores;
         $process = Process::fromShellCommandline(sprintf(
             'helm install pg-%1$s bitnami/postgresql --namespace %1$s --create-namespace ' .
                 '--set auth.username=%2$s,auth.password=%3$s,auth.database=%4$s ' .
@@ -65,7 +66,7 @@ class ProvisionPostgresInstance implements ShouldQueue
             $this->bd_data['name'],
             $this->computerPlan->storage_mb . 'Mi',
             $this->computerPlan->memory_mb . 'Mi',
-            (string) $this->computerPlan->cpu_cores
+            $cpu,
         ));
 
 
