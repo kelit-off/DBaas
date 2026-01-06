@@ -15,14 +15,18 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
     return (
         <SidebarGroup className="px-2 py-0">
             <SidebarSeparator className='mb-2' />
-            <SidebarMenu>
-                {items.map((item) => (
+            {items.map((item) => {
+                // Si l'item est un séparateur
+                if (item.title === 'Separator' && !item.href) {
+                    return <SidebarSeparator key={`sep-${Math.random()}`} />;
+                }
+
+                // Sinon, l'item normal
+                return (
                     <SidebarMenuItem key={item.title}>
                         <SidebarMenuButton
                             asChild
-                            isActive={page.url.startsWith(
-                                resolveUrl(item.href),
-                            )}
+                            isActive={page.url.startsWith(resolveUrl(item.href))}
                             tooltip={{ children: item.title }}
                         >
                             <Link href={item.href} prefetch>
@@ -31,8 +35,8 @@ export function NavMain({ items = [] }: { items: NavItem[] }) {
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
-                ))}
-            </SidebarMenu>
+                );
+            })}
         </SidebarGroup>
     );
 }

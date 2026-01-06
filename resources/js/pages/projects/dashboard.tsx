@@ -15,6 +15,17 @@ function Nav(slug: string): NavItem[] {
         {
             title: "Table Editor",
             href: "/dashboard/project/" + slug + "/tables", // Par contre cela redirige vers une page mais cette page le redirigera vers "/dashboard/projects/" + slug + "/tables/{id_table}"
+        },
+        {
+            title: "Sql Editor",
+            href: "/dashboard/project/" + slug + "/sql",
+        },
+        {
+            title: "Separator",
+        },
+        {
+            title: "Paramètres du projet",
+            href: "/dashboard/project/" + slug + "/settings/general",
         }
     ];
 }
@@ -108,7 +119,7 @@ export default function ProjectDashboard() {
                                     </div>
                                     <div className="text-sm text-neutral-400">
                                         {instance.computer_plan.cpu_cores} vCPU ·{" "}
-                                        {instance.computer_plan.ram_mb} MB RAM
+                                        {instance.computer_plan.memory_mb} MB RAM
                                     </div>
                                 </div>
 

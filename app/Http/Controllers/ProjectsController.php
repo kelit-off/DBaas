@@ -6,6 +6,7 @@ use App\Jobs\ProvisionPostgresInstance;
 use App\Models\Database;
 use App\Models\Project;
 use App\Models\Team;
+use App\Services\MonitoringService;
 use App\Services\ProjectService;
 use App\Services\TeamService;
 use Illuminate\Http\Request;
@@ -61,7 +62,7 @@ class ProjectsController extends Controller
     {
         return Inertia::render('projects/dashboard', [
             "slug" => $project_id,
-            "project" => (new ProjectService)->get($project_id)
+            "project" => (new ProjectService)->get($project_id),
         ]);
     }
 }
